@@ -139,17 +139,29 @@ Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building wit
 
 ## User Journey
 
-## Deployment: The developer deploys the TokenCuratedRegistry (TCR) smart contract to the blockchain using a development environment like Hardhat. During deployment, the developer specifies the parameters required by the contract, such as the address of the ERC20 token (if applicable), staking amount, and challenge period. However, in your case, you've decided to remove the dependency on the ERC20 token, so only the TCR contract is deployed.
+## Deployment: 
 
-## Interaction: After deployment, users can interact with the deployed TCR contract. They can submit topics to the registry, vote for or against topics, challenge listed topics, and resolve challenges. Each interaction with the contract may require the user to send transactions, which incur gas fees.
+The developer deploys the TokenCuratedRegistry (TCR) smart contract to the blockchain using a development environment like Hardhat. During deployment, the developer specifies the parameters required by the contract, such as the address of the ERC20 token (if applicable), staking amount, and challenge period. However, in your case, you've decided to remove the dependency on the ERC20 token, so only the TCR contract is deployed.
 
-## Submitting a Topic: Users submit topics they want to add to the registry. This action involves calling the submitTopic function of the TCR contract, providing the name of the topic as an argument. The contract verifies that the caller has met the necessary requirements, such as having a sufficient balance of staked tokens (in your original contract) or simply being an EOA (Externally Owned Account) in your updated contract. If successful, the topic is added to the registry.
+## Interaction: 
 
-## Voting: Users can vote for or against topics in the registry. Voting typically requires users to stake tokens or, in your updated contract, simply send a transaction to register their vote. Each vote affects the vote count for a topic.
+After deployment, users can interact with the deployed TCR contract. They can submit topics to the registry, vote for or against topics, challenge listed topics, and resolve challenges. Each interaction with the contract may require the user to send transactions, which incur gas fees.
 
-## Challenging a Topic: If a topic receives enough votes to be listed in the registry, other users can challenge its listing. This process involves calling the challengeTopic function of the TCR contract, which decreases the vote count for the challenged topic. If the vote count drops below a certain threshold, the topic is removed from the registry.
+## Submitting a Topic: 
 
-## Resolving Challenges: Challenges can be resolved either by determining that the challenge was successful (in which case the topic is removed) or unsuccessful (in which case the topic remains listed). Users can call the resolveChallenge function of the TCR contract to finalize the outcome of a challenge.
+Users submit topics they want to add to the registry. This action involves calling the submitTopic function of the TCR contract, providing the name of the topic as an argument. The contract verifies that the caller has met the necessary requirements, such as having a sufficient balance of staked tokens (in your original contract) or simply being an EOA (Externally Owned Account) in your updated contract. If successful, the topic is added to the registry.
+
+## Voting: 
+
+Users can vote for or against topics in the registry. Voting typically requires users to stake tokens or, in your updated contract, simply send a transaction to register their vote. Each vote affects the vote count for a topic.
+
+## Challenging a Topic: 
+
+If a topic receives enough votes to be listed in the registry, other users can challenge its listing. This process involves calling the challengeTopic function of the TCR contract, which decreases the vote count for the challenged topic. If the vote count drops below a certain threshold, the topic is removed from the registry.
+
+## Resolving Challenges: 
+
+Challenges can be resolved either by determining that the challenge was successful (in which case the topic is removed) or unsuccessful (in which case the topic remains listed). Users can call the resolveChallenge function of the TCR contract to finalize the outcome of a challenge.
 
 ## Important note
 
