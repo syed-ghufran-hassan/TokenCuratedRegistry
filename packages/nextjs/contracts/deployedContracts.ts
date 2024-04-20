@@ -4,6 +4,175 @@
  */
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
-const deployedContracts = {} as const;
+const deployedContracts = {
+  31337: {
+    TokenCuratedRegistry: {
+      address: "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
+      abi: [
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "string",
+              name: "topicName",
+              type: "string",
+            },
+            {
+              indexed: false,
+              internalType: "bool",
+              name: "successful",
+              type: "bool",
+            },
+          ],
+          name: "ChallengeResolved",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "string",
+              name: "topicName",
+              type: "string",
+            },
+            {
+              indexed: false,
+              internalType: "address",
+              name: "challenger",
+              type: "address",
+            },
+          ],
+          name: "TopicChallenged",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "string",
+              name: "topicName",
+              type: "string",
+            },
+          ],
+          name: "TopicListed",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "string",
+              name: "topicName",
+              type: "string",
+            },
+            {
+              indexed: false,
+              internalType: "address",
+              name: "submitter",
+              type: "address",
+            },
+          ],
+          name: "TopicSubmitted",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "_topicName",
+              type: "string",
+            },
+          ],
+          name: "challengeTopic",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "_topicName",
+              type: "string",
+            },
+            {
+              internalType: "bool",
+              name: "_successful",
+              type: "bool",
+            },
+          ],
+          name: "resolveChallenge",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "_topicName",
+              type: "string",
+            },
+          ],
+          name: "submitTopic",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          name: "topics",
+          outputs: [
+            {
+              internalType: "string",
+              name: "name",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "voteCount",
+              type: "uint256",
+            },
+            {
+              internalType: "bool",
+              name: "isListed",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "_topicName",
+              type: "string",
+            },
+          ],
+          name: "voteForTopic",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          stateMutability: "payable",
+          type: "receive",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+  },
+} as const;
 
 export default deployedContracts satisfies GenericContractsDeclaration;
