@@ -9,6 +9,12 @@ const SubmitTopic: React.FC = () => {
     setTopic('');
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   return (
     <div className="submit-topic">
       <h2>Submit a Topic</h2>
@@ -16,6 +22,7 @@ const SubmitTopic: React.FC = () => {
         type="text"
         value={topic}
         onChange={(e) => setTopic(e.target.value)}
+        onKeyPress={handleKeyPress} // Listen for Enter key press
         placeholder="Enter your topic"
         className="input"
       />
