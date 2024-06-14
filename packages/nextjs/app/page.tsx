@@ -5,10 +5,10 @@ import Link from "next/link";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
-import SubmitTopic from './SubmitTopic';
-import VoteForTopic from './VoteForTopic';
-import ChallengeTopic from './ChallengeTopic';
-import ResolveChallenge from './ResolveChallenge';
+import SubmitTopic from './components/SubmitTopic';
+import VoteForTopic from './components/VoteForTopic';
+import ChallengeTopic from './components/ChallengeTopic';
+import ResolveChallenge from './components/ResolveChallenge';
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
