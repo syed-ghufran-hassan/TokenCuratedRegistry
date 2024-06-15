@@ -5,9 +5,9 @@
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
-  31337: {
+  84532: {
     TokenCuratedRegistry: {
-      address: "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
+      address: "0x16B5893959bf37A36630b5faeA2F2e4a625b433e",
       abi: [
         {
           anonymous: false,
