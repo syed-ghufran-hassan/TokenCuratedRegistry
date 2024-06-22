@@ -1,23 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useScaffoldContract, useScaffoldContractWrite } from '~~/hooks/scaffold-eth';
+import { notification } from "~~/utils/scaffold-eth";
+import { ethers } from 'ethers';
+
 
 const ResolveChallenge: React.FC = () => {
-  const challenges = ['Challenge 1', 'Challenge 2', 'Challenge 3']; // Replace with actual challenges
+  const [topicName, setTopicName] = useState('');
+  const [successful, setSuccessful] = useState(false);
 
-  const handleResolve = (challenge: string) => {
-    // Add logic to handle resolving a challenge
-    console.log('Resolved:', challenge);
+  const { data: TokenCuratedRegistry } = useScaffoldContract({
+    contractName: "TokenCuratedRegistry",
+  });
+
+  const { write: resolveChallenge } = useScaffoldWriteContract({
+    contractName: "TokenCuratedRegistry",
+    functionName: "resolveChallenge",
+  });
+
+  const handleResolve = async () => {
+    if (topicName.trim() !== '') {
+      try {
+        // Call resolveChallenge function on the blockchain
+        await resolveChallenge({
+          args: [topicName, successful],
+        });
+
+        console.log('Resolved challenge for topic:', topicName, 'Successful:', successful);
+        setTopicName('');
+        setSuccessful(false);
+      } catch (error) {
+        console.error('Error resolving challenge:', error);
+      }
+    }
   };
 
   return (
     <div className="resolve-challenge">
       <h2>Resolve a Challenge</h2>
-      <ul>
-        {challenges.map((challenge) => (
-          <li key={challenge}>
-            {challenge} <button onClick={() => handleResolve(challenge)} className="btn">Resolve</button>
-          </li>
-        ))}
-      </ul>
+      <input
+        type="text"
+        value={topicName}
+        onChange={(e) => setTopicName(e.target.value)}
+        placeholder="Enter topic to resolve challenge"
+        className="input"
+      />
+      <label>
+        Successful:
+        <input
+          type="checkbox"
+          checked={successful}
+          onChange={(e) => setSuccessful(e.target.checked)}
+        />
+      </label>
+      <button onClick={handleResolve} className="btn">
+        Resolve
+      </button>
     </div>
   );
 };
