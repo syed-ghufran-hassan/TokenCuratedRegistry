@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-//import Link from "next/link";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { Address } from "~~/components/scaffold-eth";
@@ -9,9 +8,36 @@ import SubmitTopic from '~~/components/SubmitTopic';
 import VoteForTopic from '~~/components/VoteForTopic';
 import ChallengeTopic from '~~/components/ChallengeTopic';
 import ResolveChallenge from '~~/components/ResolveChallenge';
+import {
+  useScaffoldContract,
+  useScaffoldContractWrite,
+} from "~~/hooks/scaffold-eth";
 
 const Home: NextPage = () => {
   const { address: connectedAddress } = useAccount();
+
+  const { data: topics } = useScaffoldContract({
+    contractName: 'TokenCuratedRegistry',
+  });
+
+  // Example usage of useScaffoldWriteContract hook
+  const { writeContractAsync: writeYourContractAsync } = useScaffoldContractWrite("TokenCuratedRegistry");
+
+  // Function to handle topic submission
+  const handleAddTopic = async (topicName: string, value: string) => {
+    try {
+      await writeYourContractAsync({
+        functionName: 'submitTopic',
+        value: parseFloat(value),
+        args: [topicName],
+      });
+      console.log('Topic submitted to contract:', topicName, 'Payable value:', value);
+      // Optionally, update local state or trigger re-fetching of topics
+    } catch (error) {
+      console.error('Error submitting topic:', error);
+      // Handle error state or display error message
+    }
+  };
 
   return (
     <>
@@ -35,8 +61,8 @@ const Home: NextPage = () => {
         <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
           {/* New Components */}
           <div className="mt-16">
-            <SubmitTopic />
-            <VoteForTopic />
+            <SubmitTopic onAddTopic={handleAddTopic} />
+            <VoteForTopic topics={topics} />
             <ChallengeTopic />
             <ResolveChallenge />
           </div>
